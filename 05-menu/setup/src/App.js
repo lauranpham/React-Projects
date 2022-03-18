@@ -3,10 +3,12 @@ import Menu from './Menu';
 import Categories from './Categories';
 import items from './data';
 
-const allCategories = items.map((item) => item.category);
+// new Set object stores unique values
+const allCategories = ['all', ...new Set(items.map((item) => item.category))];
+
 function App() {
 	const [menuItems, setMenuItems] = useState(items);
-	const [categories, setCategories] = useState([]);
+	const [categories, setCategories] = useState(allCategories);
 
 	const filterItems = (category) => {
 		if (category === 'all') {
@@ -22,7 +24,7 @@ function App() {
 				<div className='title'>
 					<h2>our menu</h2>
 					<div className='underline'></div>
-					<Categories filterItems={filterItems} />
+					<Categories filterItems={filterItems} categories={categories} />
 					<Menu items={menuItems} />
 				</div>
 			</section>
