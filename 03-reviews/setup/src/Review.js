@@ -37,7 +37,7 @@ const Review = () => {
       randomNumber = checkNumber(randomNumber + 1)
     }
     setIndex(randomNumber)
-  }
+  }``
 
   return <article className='review'>
     <div className="img-container">
