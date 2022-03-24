@@ -17,8 +17,7 @@ function App() {
     } else if (name && isEditing) {
       // deal with edit
     } else {
-      // show alert
-      // create the new item
+      showAlert(true, 'item added to the list', 'success')
       const newItem = {id: new Date().getTime().toString(), title: name} // create unique id from the date timeout
       setList([...list, newItem]);
       setName('');
@@ -29,8 +28,14 @@ function App() {
     setAlert({show, msg, type})
   }
 
-  const clearItem = () => {
-    console.log('clear')
+  const clearList = () => {
+    showAlert(true, 'empty list', 'danger')
+    setList([])
+  }
+
+  const removeItem = (id) => {
+    showAlert(true, 'item removed', 'danger')
+    setList(list.filter((item)=> item.id !== id))
   }
   return (
     <section className="section-center">
@@ -46,8 +51,8 @@ function App() {
       </form>
       {list.length > 0 && 
         <div className="grocery-container">
-          <List items={list}/>
-          <button className="clear-btn" onClick={() => clearItem()}>clear items</button>
+          <List items={list} removeItem={removeItem}/>
+          <button className="clear-btn" onClick={clearList}>clear items</button>
         </div>
       }
     </section>
