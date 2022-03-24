@@ -29,20 +29,13 @@ function App() {
     setAlert({show, msg, type})
   }
 
-  useEffect(() => {
-    const timeOut = setTimeout(()=>{
-      showAlert(false)
-    }, 3000);
-    return () => clearTimeout(timeOut)
-  }, [alert])
-
   const clearItem = () => {
     console.log('clear')
   }
   return (
     <section className="section-center">
       <form action="" className="grocery-form" onSubmit={handleSubmit}>
-      {alert.show && <Alert {...alert} />}
+      {alert.show && <Alert {...alert} removeAlert={showAlert}/>}
         <h3>grocery bug</h3>
         <div className="form-control">
           <input type="text" className="grocery" placeholder="eggs" value={name} onChange={(e) => setName(e.target.value)} />
