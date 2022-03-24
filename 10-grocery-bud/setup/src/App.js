@@ -13,6 +13,7 @@ function App() {
     e.preventDefault();
     if (!name) {
       // display alert
+      showAlert(true, 'Please enter value', 'danger')
     } else if (name && isEditing) {
       // deal with edit
     } else {
@@ -24,13 +25,24 @@ function App() {
     }
   } 
 
+  const showAlert = (show = false, msg = '', type = '') => {
+    setAlert({show, msg, type})
+  }
+
+  useEffect(() => {
+    const timeOut = setTimeout(()=>{
+      showAlert(false)
+    }, 3000);
+    return () => clearTimeout(timeOut)
+  }, [alert])
+
   const clearItem = () => {
     console.log('clear')
   }
   return (
     <section className="section-center">
       <form action="" className="grocery-form" onSubmit={handleSubmit}>
-      {alert.show && <Alert/>}
+      {alert.show && <Alert {...alert} />}
         <h3>grocery bug</h3>
         <div className="form-control">
           <input type="text" className="grocery" placeholder="eggs" value={name} onChange={(e) => setName(e.target.value)} />
