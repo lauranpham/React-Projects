@@ -11,6 +11,17 @@ function App() {
   
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (!name) {
+      // display alert
+    } else if (name && isEditing) {
+      // deal with edit
+    } else {
+      // show alert
+      // create the new item
+      const newItem = {id: new Date().getTime().toString(), title: name} // create unique id from the date timeout
+      setList([...list, newItem]);
+      setName('');
+    }
   } 
 
   const clearItem = () => {
@@ -18,19 +29,22 @@ function App() {
   }
   return (
     <section className="section-center">
-      <form action="" className="grocery-form" onSubmit={handleSubmit}></form>
+      <form action="" className="grocery-form" onSubmit={handleSubmit}>
       {alert.show && <Alert/>}
-      <h3>grocery bug</h3>
-      <div className="form-control">
-        <input type="text" className="grocery" placeholder="eggs" value={name} onChange={(e) => setName(e.target.value)} />
-        <button className="submit-btn" type="submit">
-          {isEditing ? 'edit' : 'submit'}
-        </button>
-      </div>
-      <div className="grocery-container">
-        <List/>
-        <button className="clear-btn" onClick={() => clearItem()}>clear items</button>
-      </div>
+        <h3>grocery bug</h3>
+        <div className="form-control">
+          <input type="text" className="grocery" placeholder="eggs" value={name} onChange={(e) => setName(e.target.value)} />
+          <button className="submit-btn" type="submit">
+            {isEditing ? 'edit' : 'submit'}
+          </button>
+        </div>
+      </form>
+      {list.length > 0 && 
+        <div className="grocery-container">
+          <List items={list}/>
+          <button className="clear-btn" onClick={() => clearItem()}>clear items</button>
+        </div>
+      }
     </section>
   )
 }
