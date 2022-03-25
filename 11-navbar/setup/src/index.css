@@ -205,7 +205,8 @@ nav {
     display: none;
   }
   .links-container {
-    height: auto !important;
+    height: auto !important; 
+    /* set height auto !important so it overrides 0px height from smaller screens */
   }
   .links {
     display: flex;
