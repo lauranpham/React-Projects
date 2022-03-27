@@ -5,7 +5,7 @@ const Hero = () => {
 	const { closeSubmenu } = useGlobalContext();
 
 	return (
-		<section className='hero'>
+		<section className='hero' onMouseOver={closeSubmenu}>
 			<div className='hero-center'>
 				<article className='hero-info'>
 					<h1>
@@ -17,7 +17,7 @@ const Hero = () => {
 						Stripe’s software and APIs to accept payments, send payouts, and
 						manage their businesses online.
 					</p>
-          <button className="btn">Start Now</button>
+					<button className='btn'>Start Now</button>
 				</article>
 				<article className='hero-images'>
 					<img src={phoneImg} alt='phone' className='phone-img' />
