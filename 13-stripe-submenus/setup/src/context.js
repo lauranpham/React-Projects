@@ -8,10 +8,16 @@ const AppContext = React.createContext();
 export const AppProvider = ({ children }) => {
 	const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 	const [isSubmenuOpen, setIsSubmenuOpen] = useState(true);
+	const [menuText, setMenuText] = useState('');
+	const [location, setLocation] = useState({});
 
 	const openSidebar = () => setIsSidebarOpen(true);
 	const closeSidebar = () => setIsSidebarOpen(false);
-	const openSubmenu = () => setIsSubmenuOpen(true);
+	const openSubmenu = (text, coordinates) => {
+		setLocation(coordinates);
+		setMenuText(text);
+		setIsSubmenuOpen(true);
+	};
 	const closeSubmenu = () => setIsSubmenuOpen(false);
 
 	// set shared functions and states in Provider value
@@ -24,6 +30,7 @@ export const AppProvider = ({ children }) => {
 				closeSubmenu,
 				openSidebar,
 				closeSidebar,
+				location,
 			}}
 		>
 			{children}
@@ -31,5 +38,5 @@ export const AppProvider = ({ children }) => {
 	);
 };
 
-// set up custom hook function 
+// set up custom hook function
 export const useGlobalContext = () => useContext(AppContext);

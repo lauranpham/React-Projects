@@ -1,7 +1,23 @@
 import React, { useState, useRef, useEffect } from 'react'
+import { useGlobalContext } from './context';
 
+// show a dynamic width for the submenu links 
+// => useRef
 const Submenu = () => {
-  return <h2>submenu component</h2>
+  const {isSubmenuOpen, location, menuText} = useGlobalContext();
+  const container = useRef(null); 
+
+  // change submenu container position whenever nav menu text location changes
+  useEffect(() => {
+    const submenu = container.current;
+    const {center, bottom} = location;
+    submenu.style.left = `${center}px`
+    submenu.style.top = `${bottom}px`
+  }, [location])
+
+  return <aside className={`submenu ${isSubmenuOpen && 'show'}`} ref={container}>
+    submenu
+  </aside>
 }
 
 export default Submenu
