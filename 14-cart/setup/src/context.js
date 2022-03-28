@@ -18,13 +18,18 @@ const AppProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState)
 
   const clearCart = () => {
-    dispatch({type: 'CLEAR_CART'})
+    dispatch({type: 'CLEAR_CART'}) //convention is to use uppercase for action types
+  }
+
+  const remove = (id) => {
+    dispatch({type: 'REMOVE', payload: id}) //send through additional action info in payload
   }
   return (
     <AppContext.Provider
       value={{
         ...state,
         clearCart,
+        remove,
       }}
     >
       {children}
