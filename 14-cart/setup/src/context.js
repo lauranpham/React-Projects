@@ -8,7 +8,7 @@ const AppContext = React.createContext()
 
 const initialState = {
   loading: false,
-  cart: cartItems,
+  cart: [],
   total: 0,
   amount: 0,
 }
@@ -32,6 +32,18 @@ const AppProvider = ({ children }) => {
   const decrease = (id) => {
     dispatch({type: 'DECREASE', payload: id})
   }
+
+  const fetchData = async () =>{
+    dispatch({type: 'LOADING'})
+    const response = await fetch(url);
+    const cart = await response.json()
+    dispatch({type: 'DISPLAY_ITEMS', payload: cart})
+  }
+
+  // fetchData on initialisation
+  useEffect(() =>{
+    fetchData()
+  }, []) 
 
   useEffect(() => {
     // update amount every time the cart updates
