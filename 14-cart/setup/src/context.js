@@ -33,6 +33,10 @@ const AppProvider = ({ children }) => {
     dispatch({type: 'DECREASE', payload: id})
   }
 
+  const toggleAmount = (id, type) => {
+    dispatch({type: 'TOGGLE_AMOUNT', payload: {type, id}})
+  }
+
   const fetchData = async () =>{
     dispatch({type: 'LOADING'})
     const response = await fetch(url);
@@ -45,10 +49,11 @@ const AppProvider = ({ children }) => {
     fetchData()
   }, []) 
 
+  // update amount every time the cart updates
   useEffect(() => {
-    // update amount every time the cart updates
     dispatch({type: 'GET_TOTALS'})
   }, [state.cart])
+
   return (
     <AppContext.Provider
       value={{
@@ -56,7 +61,8 @@ const AppProvider = ({ children }) => {
         clearCart,
         remove,
         increase,
-        decrease
+        decrease, 
+        toggleAmount
       }}
     >
       {children}
