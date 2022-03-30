@@ -14,6 +14,7 @@ import Navbar from './components/Navbar'
 function App() {
   return (
     <Router>
+      <Navbar/>
       <Switch>
         <Route exact path="/">
           <Home/>
@@ -25,6 +26,7 @@ function App() {
           <SingleCocktail/>
         </Route>
         <Route path="*">
+          {/* * - regex of all other paths */}
           <Error/>
         </Route>
       </Switch>
