@@ -10,6 +10,11 @@ const SearchForm = () => {
     searchValue.current.focus()
   }, [])
 
+  // prevent reload of application on submit/pressing enter
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  }
+
   // call setSearchTerm when search value is changed therefore triggering an updated cocktails list
   const searchCocktails = () =>{
     setSearchTerm(searchValue.current.value)
@@ -17,7 +22,7 @@ const SearchForm = () => {
   }
   return (
     <section className="section search">
-      <form className="search-form">
+      <form className="search-form" onSubmit={handleSubmit}>
         <div className="form control">
           <label htmlFor="name">search your favourite cocktail</label>
           <input type="text" id="name" ref={searchValue} onChange={searchCocktails} />
