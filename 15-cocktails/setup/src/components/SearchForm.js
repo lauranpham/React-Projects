@@ -5,6 +5,11 @@ const SearchForm = () => {
   const {setSearchTerm} = useGlobalContext();
   const searchValue = React.useRef('');
   
+  // on iniital, it will focus on the search value ref
+  React.useEffect(() => {
+    searchValue.current.focus()
+  }, [])
+
   // call setSearchTerm when search value is changed therefore triggering an updated cocktails list
   const searchCocktails = () =>{
     setSearchTerm(searchValue.current.value)
